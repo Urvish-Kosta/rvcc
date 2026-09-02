@@ -5,3 +5,6 @@ build/
 *.s.tmp
 __pycache__/
 .DS_Store
+
+# local scratch (safe to delete)
+_to_delete/
