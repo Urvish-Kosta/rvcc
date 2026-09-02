@@ -1,0 +1,2 @@
+// expect: 12
+int main(){ int c=0; for(int i=0;i<3;i=i+1) for(int j=0;j<4;j=j+1) c=c+1; return c; }

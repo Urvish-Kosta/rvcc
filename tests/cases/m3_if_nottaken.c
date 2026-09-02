@@ -1,0 +1,2 @@
+// expect: 0
+int main(){ int x=2; if (x>3) return 1; return 0; }
