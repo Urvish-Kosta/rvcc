@@ -7,21 +7,21 @@
 
 rvcc lowers a documented subset of C to RV32IM assembly with naive stack-machine
 code generation. Every compiled program is checked by **four-way differential
-testing** — the value declared in the source, the same program run natively, the
+testing** - the value declared in the source, the same program run natively, the
 program compiled by rvcc and run on a RISC-V simulator, and the program compiled
 by the RISC-V `gcc` and run on the same simulator. All four must agree or the
 test fails.
 
 The compiler emits assembly text and links it into a bare-metal ELF. Because the
 target-specific exit mechanism is isolated into a swappable adapter, the *same*
-ELF runs on QEMU, on Spike, or on a custom RV32IM core — which is the point: rvcc
+ELF runs on QEMU, on Spike, or on a custom RV32IM core - which is the point: rvcc
 is built as the software half of a design→compile→run→verify loop with a
 hand-written [RV32IM core](https://github.com/Urvish-Kosta/riscv-rv32im-core).
 
 > **Scope, stated plainly.** This is a deliberately small compiler built in
 > honestly-scoped milestones. The accepted language (**M0-M5**) covers integer
 > and pointer/array expressions, local variables, control flow, and functions
-> with recursion — and nothing more. Code generation is naive and unoptimised.
+> with recursion - and nothing more. Code generation is naive and unoptimised.
 > See [`docs/limitations.md`](docs/limitations.md) for the
 > exact boundary and [`docs/grammar.md`](docs/grammar.md) for the accepted grammar.
 
@@ -30,8 +30,8 @@ hand-written [RV32IM core](https://github.com/Urvish-Kosta/riscv-rv32im-core).
 Most hardware portfolios stop at the RTL. rvcc closes the loop: the author's own
 RV32IM core is the *target* of a compiler the author also wrote, and compiled C
 is verified on that core with the same lockstep retire-trace harness used to
-validate the core itself. The verification discipline — differential testing
-against a production compiler rather than inspecting the output by hand — is the
+validate the core itself. The verification discipline - differential testing
+against a production compiler rather than inspecting the output by hand - is the
 core value here, not the size of the language.
 
 ## Architecture
@@ -92,7 +92,7 @@ main:
 ```
 
 And `2 + 3 * 4 - 10 / 2` (== 9) lowers through the naive stack machine
-(`examples/arith.c` -> `examples/arith.s`) — one push/pop pair per binary
+(`examples/arith.c` -> `examples/arith.s`) - one push/pop pair per binary
 operator, no optimisation.
 
 Local variables (`examples/vars.c` -> `examples/vars.s`) use a fixed `s0` frame
@@ -116,7 +116,7 @@ sudo apt-get install -y gcc-riscv64-linux-gnu qemu-system-misc
 ```
 
 Current result (M0 - M5): **82/82 pass, 0 divergences** on qemu-system-riscv32
-(rv32im/ilp32). Each case agrees four ways — declared value, native host,
+(rv32im/ilp32). Each case agrees four ways - declared value, native host,
 rvcc-on-simulator, and RISC-V gcc-on-simulator. Sample:
 
 ```
@@ -143,7 +143,7 @@ folds Spike in as a second ISA reference (five-way agreement) when `spike` is
 installed. See [`docs/core-integration.md`](docs/core-integration.md). Retargeting means
 selecting an exit adapter (`runtime/targets/exit_htif.S`, `exit_sifive.S` or
 `exit_ecall.S`) and a linker script matching the target's memory map, then
-running the identical ELF through that target — see
+running the identical ELF through that target - see
 [`docs/codegen.md`](docs/codegen.md).
 
 ## Repository layout
@@ -160,13 +160,13 @@ scripts/    build.sh, verify.sh
 ## References
 
 - RISC-V Unprivileged ISA specification (RV32I base, M extension).
-- RISC-V calling convention (psABI) — used from M4 onward.
+- RISC-V calling convention (psABI) - used from M4 onward.
 - Companion project: [riscv-rv32im-core](https://github.com/Urvish-Kosta/riscv-rv32im-core).
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT - see [LICENSE](LICENSE).
 
 ## Author
 
-Urvish Kosta — [github.com/Urvish-Kosta](https://github.com/Urvish-Kosta)
+Urvish Kosta - [github.com/Urvish-Kosta](https://github.com/Urvish-Kosta)
