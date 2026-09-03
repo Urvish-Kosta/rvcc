@@ -76,8 +76,8 @@ std::unique_ptr<Stmt> Parser::parseDeclaration() {
         expect(TokKind::RBracket, "']'");
         if (t.k == Type::Ptr)
             throw std::runtime_error("parse error (line " + std::to_string(name.line) +
-                                     "): pointer-to-array is not supported");
-        t = Type::mkArray(static_cast<int>(n.value));
+                                    "): pointer-to-array is not supported");
+        t = Type::mkArray(static_cast<int>(nr.value));
     }
     std::unique_ptr<Expr> init;
     if (accept(TokKind::Assign)) {
