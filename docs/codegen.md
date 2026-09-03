@@ -22,7 +22,7 @@ lowered with a stack machine:
   evaluate the right operand into `a0`; move it to `a1`; **pop** the left operand
   back into `a0`; combine with `add`/`sub`/`mul`/`div`/`rem`.
 
-Every intermediate value is spilled to memory (`addi sp,sp,-4; sw a0,0(sp)` /
+Every intermediate value is spilled to memory (`addi sp,-4; sw a0,0(sp)` /
 `lw a0,0(sp); addi sp,sp,4`). There is **no register allocation and no
 optimisation** — not even constant folding. This is verbose and slow, and that
 is the intended trade-off: simplicity and obvious correctness over code quality.
@@ -108,7 +108,7 @@ and annotated onto every expression. Codegen uses it to:
   before adding; likewise `ptr - int`;
 - **address vs value**: `&lvalue` and the address of a store target are produced
   by `genAddr` (a variable's address is `s0 + offset`; the address of `*p` is the
-  value of `p`); `*p` loads from that address. `a[i]` is parsed as `*(a + i)`, so
+  value of `p`; `*p` loads from that address. `a[i]` is parsed as `*(a + i)`, so
   arrays and pointers share one code path.
 
 All memory is int-width, so every load/store is `lw`/`sw` (no `char`/byte access
@@ -139,4 +139,4 @@ while rvcc evaluates the expression at runtime. The comparison therefore largely
 measured rvcc's *absence of constant folding* at that milestone. From M2 on,
 variable programs prevent gcc from folding everything, and the comparison shows
 the genuine overhead of the memory-spilling stack machine versus gcc's register
-use (~2.5x on the current corpus) — reported, not hidden.
+ruse (~2.5x on the current corpus) — reported, not hidden.
