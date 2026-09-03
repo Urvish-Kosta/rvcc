@@ -81,7 +81,7 @@ std::vector<Token> Lexer::tokenize() {
         else if (c1 == ']') emit1(TokKind::RBracket);
         else {
             throw std::runtime_error("lex error (line " + std::to_string(startLine) +
-                                     "): unexpected character '" + std::string(1, c1) + "'");
+                                    "): unexpected character '" + std::string(1, c1) + "'");
         }
         out.push_back(t);
     }
