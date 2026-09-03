@@ -26,7 +26,7 @@ M="-march=rv32im -mabi=ilp32"
 "${PREFIX}ld" -m elf32lriscv -T runtime/link.ld /tmp/_crt0.o /tmp/_m.o /tmp/_exit.o -o "$ELF"
 echo "built $ELF (HTIF exit; tohost/fromhost symbols present)"
 
-# --- point this at your core's harness or Spike ---
+# --- point this at your core's harness ---
 # spike --isa=rv32im "$ELF"; echo "spike exit = $?"
 # CORE_RUN="../riscv-rv32im-core/obj_dir/Vtop +elf=$ELF"; eval "$CORE_RUN"
 echo "next: run '$ELF' on your core's lockstep harness (see docs/core-integration.md)"
